@@ -56,7 +56,7 @@ def one_hot_encoding(sequence: str):
     return [amino_acid_map[aa] for aa in sequence]
 
 
-def retrieve_dataset(input_df):
+def retrieve_dataset(input_df, max_seq_length: int, max_intensity_length: int):
     sequences = [one_hot_encoding(seq) for seq in input_df["peptide_sequence"]]
     intensities = [
         torch.tensor([float(item) for item in intens.split(";")]) for intens in input_df["fragment_intensity"]
@@ -65,7 +65,7 @@ def retrieve_dataset(input_df):
     max_seq_length = max(len(seq) for seq in sequences)
     padded_sequences = [seq + [0] * (max_seq_length - len(seq)) for seq in sequences]
 
-    max_intensity_length = max(len(intensity) for intensity in intensities)
+    # max_intensity_length = max(len(intensity) for intensity in intensities)
     padded_intensities = [
         torch.cat([intens, torch.zeros(max_intensity_length - len(intens))]) for intens in intensities
     ]
