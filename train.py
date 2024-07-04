@@ -162,8 +162,9 @@ def test_model(model, criterion, test_dl, device, tb_writer, detail: str):
     mean_pearson_coefficient = sum(pearson_coefficients) / len(pearson_coefficients)
 
     res["test"].append([test_loss, mean_cosine_similarity, mean_pearson_coefficient])
-    print(f"Test: Mean Cosine Similarity: {mean_cosine_similarity:.4f}")
-    print(f"Test: Mean Pearson Correlation Coefficient: {mean_pearson_coefficient:.4f}")
+    print(detail)
+    print(f"\tTest: Mean Cosine Similarity: {mean_cosine_similarity:.4f}")
+    print(f"\tTest: Mean Pearson Correlation Coefficient: {mean_pearson_coefficient:.4f}")
 
     tb_writer.add_scalar(f"Loss/Test {detail}", test_loss)
     tb_writer.add_scalar(f"Cosine Similarity/Test {detail}", mean_cosine_similarity)
