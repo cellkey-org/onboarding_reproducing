@@ -1,3 +1,6 @@
 data/
 __pycache__/
 .DS_Store
+tensorboard_logs/
+pre_trained_model_parameters_60_80.pth
+park_code/
